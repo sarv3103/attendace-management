@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Attendance System</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+    <div class="login-container" id="login-container">
+        <h2>Login</h2>
+        <form id="login-form">
+            <input type="text" id="username" placeholder="Username" required />
+            <input type="password" id="password" placeholder="Password" required />
+            <select id="role">
+                <option value="admin">Admin</option>
+                <option value="user">User</option>
+            </select>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <div class="dashboard" id="dashboard" style="display:none;">
+        <h1>Attendance Dashboard</h1>
+        <button onclick="logout()" class="logout-btn">Logout</button>
+        
+        <div id="stats">
+            <p>Total: <span id="total-count">0</span></p>
+            <p>Present: <span id="present-count">0</span></p>
+            <p>Absent: <span id="absent-count">0</span></p>
+            <p>College Work: <span id="cw-count">0</span></p>
+        </div>
+        
+        <form id="attendance-form">
+            <input type="text" id="student-name" placeholder="Student Name" required />
+            <input type="date" id="attendance-date" required />
+            <select id="attendance-status">
+                <option value="Present">Present</option>
+                <option value="Absent">Absent</option>
+                <option value="College Work">College Work</option>
+            </select>
+            <button type="submit">Add Attendance</button>
+        </form>
+
+        <select id="filter-status" onchange="filterTable()">
+            <option value="all">All</option>
+            <option value="Present">Present</option>
+            <option value="Absent">Absent</option>
+            <option value="College Work">College Work</option>
+        </select>
+
+        <button onclick="downloadExcel()">Download Attendance</button>
+        
+        <table id="attendance-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="attendance-body"></tbody>
+        </table>
+
+        <!-- QR Code Container -->
+        <div id="qr-container"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
